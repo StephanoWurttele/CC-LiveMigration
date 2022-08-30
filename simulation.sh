@@ -63,7 +63,7 @@ stress_machine(){
 cpu_min_idle=0.2
 ram_min_free=100000
 
-for (( i = 0; i < 10; i++ )); do
+for (( i = 0; i < 4; i++ )); do
 
 vms_var=$(vboxmanage list vms runningvms |  awk -F" " '{print $1}' | sed 's/"//g')
 

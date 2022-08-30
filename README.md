@@ -1,3 +1,11 @@
+# Policy
+
+Run:
+``` sh policy.sh <VM Instance Name> <VM username> <VM password> ```
+i.e.:
+```
+sh policy.sh Debian administrator admin
+```
 ## stress-ng parameters used
 
 - \-c \<N\>: N workers to perform tasks sequentually through the cpu stress methods.

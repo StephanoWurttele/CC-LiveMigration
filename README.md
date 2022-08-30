@@ -1,7 +1,10 @@
 # Policy
 
 Run:
-``` sh policy.sh <VM Instance Name> <VM username> <VM password> ```
+``` 
+sh policy.sh <VM Instance Name> <VM username> <VM password> 
+```
+Where VM Instance Name is the origin VM.
 i.e.:
 ```
 sh policy.sh Debian administrator admin

@@ -3,7 +3,7 @@
 teleport_machine(){
  
 	if [[ $1 == "Debian" ]]; then
-    vboxmanage modifyvm Debian4 --teleporter on --teleporterport 6000
+    	vboxmanage modifyvm Debian4 --teleporter on --teleporterport 6000
 		vboxmanage startvm Debian4 &
 
 		sleep 4

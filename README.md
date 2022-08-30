@@ -1,15 +1,32 @@
 # Policy
 
+In order for metrics to be read, Guest Additions must be installed in the VMs.
+
 Run:
 ``` 
-sh policy.sh <VM Instance Name> <VM username> <VM password> 
+sh policy.sh <VM Instance Name>
 ```
-Where VM Instance Name is the origin VM.
+Where VM Instance Name is the origin VM's name in the hypervisor.
 i.e.:
 ```
 sh policy.sh Debian administrator admin
 ```
-## stress-ng parameters used
+
+# Simulation
+
+Run:
+``` 
+sh policy.sh <VMs Name in common> <VM username> <VM password> 
+```
+
+Where VMs OS is the name that all machines in the transaction share, VM username is the username for all of them and VM password is the password for all of them.
+
+In order for stress to be used, it must be installed by running:
+```
+sudo apt-get install stress
+```
+
+## stress parameters used
 
 - \-c \<N\>: N workers to perform tasks sequentually through the cpu stress methods.
 - \-i \<N\>: N workers calling sync(2) to buffer cache disk

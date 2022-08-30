@@ -1,14 +1,16 @@
 #/bin/bash
 
-#VBoxManage metrics setup --period 1 --samples 1 Debian Guest/CPU/Load,Guest/RAM/Usage
-#VBoxManage metrics setup --period 1 --samples 1 Debian2 Guest/CPU/Load,Guest/RAM/Usage
-#VBoxManage metrics setup --period 1 --samples 1 Debian3 Guest/CPU/Load,Guest/RAM/Usage
-#VBoxManage metrics setup --period 1 --samples 1 Debian4 Guest/CPU/Load,Guest/RAM/Usage
+VBoxManage metrics setup --period 1 --samples 1 Debian Guest/CPU/Load,Guest/RAM/Usage
+VBoxManage metrics setup --period 1 --samples 1 Debian2 Guest/CPU/Load,Guest/RAM/Usage
+VBoxManage metrics setup --period 1 --samples 1 Debian3 Guest/CPU/Load,Guest/RAM/Usage
+VBoxManage metrics setup --period 1 --samples 1 Debian4 Guest/CPU/Load,Guest/RAM/Usage
 
 
 teleport_machine(){
  
 	if [[ $1 == "Debian" ]]; then
+		vboxmanage modifyvm Debian4 --teleporter on --teleporterport 6000
+
 		vboxmanage startvm Debian4 &
 
 		sleep 4
@@ -29,6 +31,8 @@ teleport_machine(){
 		VBoxManage metrics setup --period 1 --samples 1 Debian Guest/CPU/Load,Guest/RAM/Usage
 	fi
 	if [[ $1 == "Debian2" ]]; then
+		vboxmanage modifyvm Debian3 --teleporter on --teleporterport 6666
+
 		vboxmanage startvm Debian3 &
 
 		sleep 4
@@ -38,6 +42,8 @@ teleport_machine(){
 		VBoxManage metrics setup --period 1 --samples 1 Debian3 Guest/CPU/Load,Guest/RAM/Usage
 	fi
 	if [[ $1 == "Debian3" ]]; then
+		vboxmanage modifyvm Debian2 --teleporter on --teleporterport 6666
+
 		vboxmanage startvm Debian2 &
 
 		sleep 4
@@ -57,16 +63,16 @@ stress_machine(){
 cpu_min_idle=0.2
 ram_min_free=100000
 
-for (( i = 0; i < 1; i++ )); do
+for (( i = 0; i < 10; i++ )); do
 
 vms_var=$(vboxmanage list vms runningvms |  awk -F" " '{print $1}' | sed 's/"//g')
 
 	for vm in $vms_var
 	do
-		echo "Vm is" $vm
+		echo ">>>>> VM is" $vm
 		probability=$(($RANDOM % 3))
-		echo $probability
-		if [[ $probability == 1 ]]; then
+		echo "Random val"$probability
+		if [[ $probability < 2 ]]; then
 			stress_machine $vm $2 $3
 		fi
 		teleported=false

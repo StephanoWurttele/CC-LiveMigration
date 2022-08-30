@@ -73,6 +73,10 @@ vms_var=$(vboxmanage list vms runningvms |  awk -F" " '{print $1}' | sed 's/"//g
 		vm_ram_free=$(echo $vm_query | awk -F" " '{print $3}') 
 		echo $vm "IDLE CPU" $vm_cpu_idle
 		echo $vm "FREE RAM" $vm_ram_free
+		if [[ -z $vm_cpu_idle ]] || [[ -z $vm_ram_free ]]; then
+		    echo "System metrics not yet loaded. Please, run this program again"
+		    exit
+		fi
 		if [[ $vm_cpu_idle <  $cpu_min_idle ]]; then
 			echo "HIGH CPU USAGE"
 			teleport_machine $vm

@@ -27,7 +27,7 @@ teleport_machine(){
 
 		sleep 4
 		
-		VBoxManage controlvm $1 teleport --host localhost --port 6000
+		VBoxManage controlvm $1 teleport --host localhost --port 6666
 
 		VBoxManage metrics setup --period 1 --samples 1 Debian3 Guest/CPU/Load,Guest/RAM/Usage
 	fi
@@ -36,7 +36,7 @@ teleport_machine(){
 
 		sleep 4
 		
-		VBoxManage controlvm $1 teleport --host localhost --port 6000
+		VBoxManage controlvm $1 teleport --host localhost --port 6666
 		
 		VBoxManage metrics setup --period 1 --samples 1 Debian2 Guest/CPU/Load,Guest/RAM/Usage
 	fi	

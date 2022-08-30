@@ -51,6 +51,7 @@ if [[ $is_running -eq 0 ]]; then
   read  -n 1 -p "Press enter when system is done booting:" input
 fi
 vboxmanage metrics setup --period 1 --samples 1 $1 Guest/CPU/Load,Guest/RAM/Usage
+sleep 1
 vms_var=$(vboxmanage list vms runningvms |  awk -F" " '{print $1}' | sed 's/"//g')
 for vm in $vms_var
 do

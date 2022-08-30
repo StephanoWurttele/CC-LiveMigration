@@ -50,7 +50,6 @@ if [[ $is_running -eq 0 ]]; then
   vboxmanage startvm $1;
   read  -n 1 -p "Press enter when system is done booting:" input
 fi
-VBoxManage guestcontrol $1 run --no-wait-stdout --exe "/usr/bin/lsmod" --username $2 --password $3
 vboxmanage metrics setup --period 1 --samples 1 $1 Guest/CPU/Load,Guest/RAM/Usage
 sleep 2
 vms_var=$(vboxmanage list vms runningvms |  awk -F" " '{print $1}' | sed 's/"//g')
